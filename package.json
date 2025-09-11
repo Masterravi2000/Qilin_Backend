@@ -1,0 +1,32 @@
+{
+  "name": "qilin_backend",
+  "version": "1.0.0",
+  "description": "this is the qilin backend repo for all the backend related requirements and workings",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Masterravi2000/Qilin_Backend.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Masterravi2000/Qilin_Backend/issues"
+  },
+  "homepage": "https://github.com/Masterravi2000/Qilin_Backend#readme",
+  "dependencies": {
+    "cloudinary": "^1.41.3",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
+    "express": "^4.21.2",
+    "mongoose": "^8.18.1",
+    "multer": "^2.0.2",
+    "multer-storage-cloudinary": "^4.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
