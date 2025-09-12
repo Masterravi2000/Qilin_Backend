@@ -1,9 +1,11 @@
+require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const { ApiError } = require("./utils/customErrorHandler"); // optional if using custom errors
 const globalErrorHandler = require("./src/controllers/error.controller"); // optional
 const optionalQuestionRouter = require("./src/routes/optionalQuestion.route");
 const writtenQuestionRouter = require("./src/routes/writtenQuestion.route");
+const productRoutes = require('./src/routes/product.route')
 
 const app = express();
 
@@ -14,6 +16,10 @@ app.use(express.urlencoded({ extended: true }));
 //registered route
 app.use("/api/v1/optional-questions", optionalQuestionRouter);
 app.use("/api/v1/written-questions", writtenQuestionRouter);
+app.use("/api/v1/products", productRoutes);
+
+console.log('Cloud name:', process.env.CLOUDINARY_CLOUD_NAME);
+console.log('API key:', process.env.CLOUDINARY_API_KEY);
 
 // CORS setup
 const corsOptions = {
@@ -29,8 +35,6 @@ app.get("/api/v1/health", (req, res) => {
   res.status(200).json({ message: "Backend is running!" });
 });
 
-// Mount routes
-// app.use("/api/v1/products", productRouter);
 
 // Handle undefined routes
 app.all("*", (req, res, next) => {
