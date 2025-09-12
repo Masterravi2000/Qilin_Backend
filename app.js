@@ -6,6 +6,8 @@ const globalErrorHandler = require("./src/controllers/error.controller"); // opt
 const optionalQuestionRouter = require("./src/routes/optionalQuestion.route");
 const writtenQuestionRouter = require("./src/routes/writtenQuestion.route");
 const productRoutes = require('./src/routes/product.route')
+const homeRoutes = require('./src/routes/home.routes')
+const aiRoute = require('./src/routes/ai.route')
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/v1/optional-questions", optionalQuestionRouter);
 app.use("/api/v1/written-questions", writtenQuestionRouter);
 app.use("/api/v1/products", productRoutes);
+app.use("/api/home-category", homeRoutes);
+app.use("/api/ai", aiRoute);
 
 console.log('Cloud name:', process.env.CLOUDINARY_CLOUD_NAME);
 console.log('API key:', process.env.CLOUDINARY_API_KEY);
