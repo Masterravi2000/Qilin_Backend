@@ -22,9 +22,6 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/home-category", homeRoutes);
 app.use("/api/ai", aiRoute);
 
-console.log('Cloud name:', process.env.CLOUDINARY_CLOUD_NAME);
-console.log('API key:', process.env.CLOUDINARY_API_KEY);
-
 // CORS setup
 const corsOptions = {
   origin: process.env.CLIENT_URL || "*",
