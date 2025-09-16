@@ -15,13 +15,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//registered route
-app.use("/api/v1/optional-questions", optionalQuestionRouter);
-app.use("/api/v1/written-questions", writtenQuestionRouter);
-app.use("/api/v1/products", productRoutes);
-app.use("/api/home-category", homeRoutes);
-app.use("/api/ai", aiRoute);
-
 // CORS setup
 const corsOptions = {
   origin: process.env.CLIENT_URL || "*",
@@ -30,6 +23,15 @@ const corsOptions = {
   credentials: true,
 };
 app.use(cors(corsOptions));
+
+
+//registered route
+app.use("/api/v1/optional-questions", optionalQuestionRouter);
+app.use("/api/v1/written-questions", writtenQuestionRouter);
+app.use("/api/v1/products", productRoutes);
+app.use("/api/home-category", homeRoutes);
+app.use("/api/ai", aiRoute);
+
 
 // Health check
 app.get("/api/v1/health", (req, res) => {

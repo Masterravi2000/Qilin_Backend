@@ -25,7 +25,7 @@ const generateProductAttributes = async (req, res) => {
     const condition = optionalQuestions.find(q => q.name === "Condition")?.options || [];
     const category = optionalQuestions.find(q => q.name === "Category")?.options || [];
 
-const prompt = `
+    const prompt = `
 You are an AI assistant for a preloved fashion marketplace catering to Gen Z women in India.
 
 Analyze these product images: ${image_urls.join(", ")}.
@@ -76,7 +76,18 @@ Example format:
 
     const response = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [{ role: "user", content: prompt }],
+      messages: [
+        {
+          role: "user",
+          content: [
+            { type: "text", text: prompt },
+            ...image_urls.map(url => ({
+              type: "image_url",
+              image_url: { url }
+            }))
+          ]
+        }
+      ]
     });
 
     let rawText = response.choices[0].message.content;
@@ -93,6 +104,14 @@ Example format:
 
     res.status(200).json({ attributes });
   } catch (err) {
+    // Handle rate limit gracefully
+    if (err.code === "rate_limit_exceeded") {
+      console.error("Rate limit hit:", err.message);
+      return res.status(429).json({
+        error: "AI rate limit reached. Please try again after a short while."
+      });
+    }
+
     console.error("OpenAI AI Error:", err);
     res.status(500).json({ error: "AI processing failed" });
   }
