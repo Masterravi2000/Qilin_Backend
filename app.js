@@ -17,7 +17,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // CORS setup
 const corsOptions = {
-  origin: process.env.CLIENT_URL || "*",
+  origin: "https://qilin-backend.onrender.com",
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   allowedHeaders: ["Content-Type", "Authorization"],
   credentials: false,
